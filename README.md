@@ -26,6 +26,6 @@ The single category and product-data source is `dist/catalog.js`. Update categor
 
 ## Missing launch details
 
-The supplied material did not include a verified Instagram URL, WhatsApp number, contact email, custom domain, or licensed font files. No placeholder social/contact links were published. Once verified, add those destinations to the contact section and footer, then add confirmed social profiles to the Organization JSON-LD `sameAs` list.
+The verified Instagram profile is `https://www.instagram.com/diraa_by_r/` and is linked from the contact section and both page footers. A verified WhatsApp number, contact email, custom domain, and licensed font files have not been supplied, so no placeholder destinations or unlicensed fonts are published.
 
 If a custom domain is connected, update the canonical URL, Open Graph URL/image URL, JSON-LD URL/logo URL, `robots.txt`, and `sitemap.xml`.
