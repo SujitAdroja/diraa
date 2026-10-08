@@ -109,6 +109,7 @@ The collection page loads scripts in this order:
 
 - Reads `window.DiraaCatalog`
 - Builds desktop filter buttons and the mobile category `<select>`
+- Displays catalog-derived product counts beside every desktop category and in every mobile category option
 - Renders product cards by mapping the matching objects from `catalog.products`
 - Shows every catalog product for the `all` view; there is no fixed eight-product limit
 - Filters products using `?category=<slug>`

@@ -12,6 +12,14 @@
   const { categories, products } = catalog;
   const validSlugs = new Set(categories.map((category) => category.slug));
   const categoryLabels = new Map(categories.map((category) => [category.slug, category.label]));
+  const categoryProductCounts = new Map(categories.map((category) => [category.slug, 0]));
+
+  products.forEach((product) => {
+    if (product.category === "all") return;
+    if (!categoryProductCounts.has(product.category)) return;
+    categoryProductCounts.set(product.category, categoryProductCounts.get(product.category) + 1);
+  });
+  categoryProductCounts.set("all", products.length);
 
   const getCategoryFromUrl = () => {
     const requested = new URLSearchParams(window.location.search).get("category");
@@ -75,17 +83,25 @@
   };
 
   categories.forEach((category) => {
+    const productCount = categoryProductCounts.get(category.slug) || 0;
+    const productLabel = productCount === 1 ? "product" : "products";
     const button = document.createElement("button");
+    const buttonCount = document.createElement("span");
+
     button.type = "button";
     button.dataset.category = category.slug;
-    button.textContent = category.label;
+    button.append(document.createTextNode(category.label), buttonCount);
+    buttonCount.className = "category-filter-count";
+    buttonCount.textContent = String(productCount);
+    buttonCount.setAttribute("aria-hidden", "true");
+    button.setAttribute("aria-label", `${category.label}, ${productCount} ${productLabel}`);
     button.setAttribute("aria-pressed", "false");
     button.addEventListener("click", () => render(category.slug, true));
     buttonGroup.append(button);
 
     const option = document.createElement("option");
     option.value = category.slug;
-    option.textContent = category.label;
+    option.textContent = `${category.label} (${productCount})`;
     select.append(option);
   });
 
